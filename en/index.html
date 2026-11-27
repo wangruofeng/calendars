@@ -161,7 +161,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 <header id="appbar">
   <span class="brand"><a href="#home">Calendar Studio</a></span>
   <a class="backlink" href="#home">&larr; All calendar types</a>
-  <a id="language" href="../index.html" lang="zh-CN" hreflang="zh-CN">简体中文</a>
+  <a id="language" href="../index.html" lang="zh-CN" hreflang="zh-CN"><span aria-hidden="true">🇨🇳</span> 简体中文</a>
 </header>
 
 <div class="nojs" id="nojs"><p>Open this file in a browser with JavaScript enabled.</p></div>
@@ -1294,7 +1294,11 @@ const PRESETS = {
   ink: ["000000", "b3b3b3", "0000b3", "b30000", "004400", "3a5fcd"],
   bg:  ["FFFFFF", "FFF4DE", "f4faf4", "eef2ff", "fdf6e3", "000000"]
 };
-const LANGFLAGS = {"en":"🇺🇸","af":"🇿🇦","ca":"🇦🇩","da":"🇩🇰","de":"🇩🇪","es":"🇪🇸","et":"🇪🇪","fi":"🇫🇮","fil":"🇵🇭","fr":"🇫🇷","hu":"🇭🇺","id":"🇮🇩","is":"🇮🇸","it":"🇮🇹","ms":"🇲🇾","nl":"🇳🇱","no":"🇳🇴","pl":"🇵🇱","pt":"🇵🇹","ro":"🇷🇴","sq":"🇦🇱","sv":"🇸🇪","sw":"🇹🇿","tk":"🇹🇷"};
+const LANGFLAGS = {"zh":"🇨🇳","en":"🇺🇸","af":"🇿🇦","ca":"🇦🇩","da":"🇩🇰","de":"🇩🇪","es":"🇪🇸","et":"🇪🇪","fi":"🇫🇮","fil":"🇵🇭","fr":"🇫🇷","hu":"🇭🇺","id":"🇮🇩","is":"🇮🇸","it":"🇮🇹","ms":"🇲🇾","nl":"🇳🇱","no":"🇳🇴","pl":"🇵🇱","pt":"🇵🇹","ro":"🇷🇴","sq":"🇦🇱","sv":"🇸🇪","sw":"🇹🇿","tk":"🇹🇷"};
+
+const languageNames = typeof Intl.DisplayNames === "function"
+  ? new Intl.DisplayNames(["en"], { type: "language", fallback: "none" })
+  : null;
 
 // Nobody shops for a calendar in December. From mid-August the generators
 // default to next year, because that is when people start needing one.
@@ -1396,7 +1400,8 @@ function makeCalTool(cfg) {
       for (const l of LANGS) {
         const o = document.createElement("option");
         o.value = l[0];
-        o.textContent = (LANGFLAGS[l[0]] ? LANGFLAGS[l[0]] + "  " : "") + l[1];
+        const name = l[0] === "zh" ? "Simplified Chinese" : languageNames?.of(l[0]) ?? l[1];
+        o.textContent = (LANGFLAGS[l[0]] ? LANGFLAGS[l[0]] + "  " : "") + name;
         $("lang").appendChild(o);
       }
     }
