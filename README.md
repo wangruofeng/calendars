@@ -19,6 +19,10 @@
 
 点击首页的「下载应用」，或直接用浏览器打开 `index.html`（简体中文）或 `en/index.html`（英文）。两版均为独立 HTML 文件，无需安装依赖。要在本地同时浏览两版，可在仓库根目录运行 `python3 -m http.server 8000`，然后访问 [简体中文](http://localhost:8000/) 或 [English](http://localhost:8000/en/)。
 
+## 关于作者
+
+我是 Ruofeng Wang，这个工具由我改编和维护。欢迎[在 X 上关注 @oneruofeng](https://x.com/oneruofeng)，也可以告诉我你想用什么日历版式。项目采用 [CC0 1.0](LICENSE)。
+
 ## 部署与来源
 
 Cloudflare Pages 从 `main` 分支自动部署，静态输出目录为仓库根目录，无需构建命令。
